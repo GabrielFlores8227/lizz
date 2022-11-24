@@ -3,17 +3,23 @@ function DEPENDENCY_CHECKER_T() {
 	command -v $1 &> /dev/null
 	if [ $? -eq 1 ]
 	then
-		eval $2 && break
+		echo -e "\033[1;32m[#] Installing $1\033[0m"
+		eval $2
 	fi
 }
 
-function DEPENDENCY_CHECKER_D() {
+function PACKAGE_CHECKER_T() {
 	command -v $1 &> /dev/null
 	if [ $? -eq 1 ]
 	then
-		echo 1
+		echo -e "\033[1;32m[#] Installing $1\033[0m"
+		eval $2 \
+		&& echo -e "\033[1;32m[#] $1 installed\033[0m" \
+		&& echo -ne "\n\033[0;37;42mPRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
+		|| echo -ne "\n\033[0;37;41mPRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 	else
-		echo 0
+		echo -e "\033[1;32m[#] $1 is already installed\033[0m"
+		echo -ne "\n\033[0;37;42mPRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 	fi
 }
 
@@ -26,7 +32,7 @@ function PROGRAMMING_LANGUAGE_MENU() {
 	dialog --menu "Programming Languages" 20 75 15 \
 	1 "Node.js | source: https://deb.nodesource.com/setup_19.x" \
 	2 "Python3 | source: python3-defaults" \
-	x "< Quit" --stdout
+	x "< Back" --stdout
 	)
 
 	case $MENU in
@@ -39,7 +45,7 @@ function PROGRAMMING_LANGUAGE_MENU() {
 			PYTHON_DRIVER && PROGRAMMING_LANGUAGE_MENU
 			;;
 		x)
-			clear && exit
+			LIZZ_MENU
 			;;
 		*)
 			LIZZ_MENU
