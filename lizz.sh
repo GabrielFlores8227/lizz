@@ -1,4 +1,10 @@
 #!/bin/bash
-source ./sys/modules/system/system.sh
-source ./sys/modules/driver/driver.sh
-sudo apt-get update && LIZZ_MENU
+source ./system/system/system.sh
+
+if ! command -v dialog &> /dev/null
+then
+	INSTALL_PACKAGE dialog "sudo apt-get install dialog"
+fi
+
+LIZZ_MENU
+
