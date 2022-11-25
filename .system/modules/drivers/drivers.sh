@@ -51,7 +51,7 @@ function RUST_DRIVER() {
 	! dpkg -s make &> /dev/null && INSTALL_PACKAGE make "sudo apt-get install make"
 
 	#rust
-	INSTALL_PACKAGE rustc "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+	INSTALL_PACKAGE rustc "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh && source $HOME/.cargo/env"
 }
 
 #---other-packages-drivers----------------------------------------------------------
