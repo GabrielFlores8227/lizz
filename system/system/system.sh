@@ -10,16 +10,18 @@ function MYSQL_DRIVER() {
 	#dependency
 	if ! dpkg -s libssl1.1 &> /dev/null
 	then
-		[[ ! -f ./system/cache/mysql/libssl1.1_1.1.1f-1ubuntu2_amd64.deb ]] \
-		&& wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P ./system/cache/mysql
-		INSTALL_PACKAGE libssl1.1 "sudo dpkg -i ./system/cache/mysql/libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
+		[[ ! -f ./system/cache/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb ]] \
+		&& wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P ./system/cache/mysql/libssl1
+		INSTALL_PACKAGE libssl1.1 "sudo dpkg -i ./system/cache/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
 	fi
 	
 	#dependency
 	! dpkg -s gnupg &> /dev/null && INSTALL_PACKAGE "sudo apt-get install gnupg" 
 
 	#mysql
-	INSTALL_PACKAGE mysql "wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P /tmp && sudo dpkg -i /tmp/mysql-apt-config*; sudo apt update && sudo apt install mysql-server"
+	[[ ! -f ./system/cache/mysql/mysql-apt-config_0.8.22-1_all.deb ]] \
+	&& INSTALL_PACKAGE mysql_1 "wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P ./system/cache/mysql"
+	INSTALL_PACKAGE mysql_2 "sudo dpkg -i ./system/cache/mysql/mysql-apt-config*; sudo apt update && sudo apt install mysql-server"
 }
 
 #node drivers
