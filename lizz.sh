@@ -4,6 +4,7 @@ source ./.system/modules/drivers/drivers.sh
 #dependency
 ! command -v dialog &> /dev/null && INSTALL_PACKAGE dialog "sudo apt-get install dialog"
 
+#dependency
 if [[ ! -f  $HOME/.fonts/lizz.cache ]]
 then
 	#dependency
