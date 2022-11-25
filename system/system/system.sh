@@ -1,9 +1,16 @@
 #---drivers-----------------------------------------------------------------------------------------
 #mysql drivers
 function MYSQL_DRIVER() {
-	! dpkg -s gnupg &> /dev/null && INSTALL_PACKAGE gnupg "sudo apt-get install gnupg" 
+	! dpkg -s mecab-ipadic-utf8 &> /dev/null && INSTALL_PACKAGE mecab-ipadic-utf8 "sudo apt-get install mecab-ipadic-utf8"
+
+	! dpkg -s libssl1.1 &> /dev/null \
+	&& wget wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P ./system/cache/mysql \
+	&& sudo dpkg -i ./system/cache/mysql/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+
+	! dpkg -s gnupg &> /dev/null && INSTALL_PACKAGE "sudo apt-get install gnupg" 
+
 	! command -v wget &> /dev/null && INSTALL_PACKAGE gnupg "sudo apt-get install wget" 
-	INSTALL_PACKAGE mysql "wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P /tmp && sudo dpkg -i /tmp/mysql-apt-config* && sudo apt update && sudo apt install mysql-server"
+	INSTALL_PACKAGE mysql "wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P /tmp && sudo dpkg -i /tmp/mysql-apt-config*; sudo apt update && sudo apt install mysql-server"
 }
 
 #node drivers
