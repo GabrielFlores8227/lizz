@@ -38,6 +38,15 @@ function PYTHON_DRIVER() {
 	INSTALL_PACKAGE python3 "sudo apt-get install python3 python3-pip"
 }
 
+function GOOGLE_CHROME_DRIVER() {
+	#dependency
+	! command -v wget &> /dev/null && INSTALL_PACKAGE wget "sudo apt-get install wget" 
+	
+	[[ ! -f ./system/cache/google-chrome/google-chrome-stable_current_amd64.deb ]] \
+	&& INSTALL_PACKAGE  google-chrome_1 "wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P ./system/cache/google-chrome"
+	INSTALL_PACKAGE google-chrome_2 "sudo dpkg -i ./system/cache/google-chrome/google-chrome-stable_current_amd64.deb"
+}
+
 function NVIM_AND_INIT_DRIVER() {
 	clear
 
@@ -75,11 +84,33 @@ function NVIM_AND_INIT_DRIVER() {
 	[[ ! -f $HOME/.config/nvim/lizz-cache.txt ]] \
 	&& git clone https://github.com/GabrielFlores8227/nvim $HOME/.config/nvim && touch $HOME/.config/nvim/lizz-cache.txt
 
-	PROGRAMS_MENU
+	SOFTWARE_MENU
 }
 
-function INSTALL_DRIVER() {
-	if ! command -v $1 &> /dev/null
+function SYNTH_SHELL_DRIVER() {
+	#dependency
+	! command -v git &> /dev/null && INSTALL_PACKAGE git "sudo apt-get install git"
+	! dpkg -s fonts-powerline &> /dev/null && INSTALL_PACKAGE fonts-powerline "sudo apt install fonts-powerline"
+
+	[[ ! -d ./system/cache/synth-shell ]] \
+	&& INSTALL_PACKAGE synth-shell_1 "git clone --recursive https://github.com/andresgongora/synth-shell.git ./system/cache/synth-shell"
+	INSTALL_PACKAGE synth_shell_2 "chmod +x ./system/cache/synth-shell/setup.sh && ./system/cache/synth-shell/setup.sh"
+	
+	SOFTWARE_MENU
+}
+
+function TEAM_VIEWER_DRIVER() {
+	#dependency
+	! command -v wget &> /dev/null && INSTALL_PACKAGE wget "sudo apt-get install wget"
+	
+	#https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+	[[ ! -f ./system/cache/team-viewer/teamviewer_amd64.deb ]] \
+	&& INSTALL_PACKAGE  team-viewer_1 "wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P ./system/cache/team-viewer"
+	INSTALL_PACKAGE team-viewer_2 "sudo dpkg -i ./system/cache/team-viewer/teamviewer_amd64.deb"
+}
+
+function EXECUTE_DRIVER() {
+	if ! command -v $1 &> /dev/null && ! dpkg -s $1 &> /dev/null
 	then
 		$2
 	else
@@ -89,7 +120,7 @@ function INSTALL_DRIVER() {
 			$2
 		fi
 	fi
-	PROGRAMMING_LANGUAGE_MENU
+	$3
 }
 
 #---util-------------------------------------------------------------------------------------------
@@ -111,13 +142,13 @@ function PROGRAMMING_LANGUAGE_MENU() {
 
 	case $MENU in
 		1)
-			INSTALL_DRIVER mysql MYSQL_DRIVER
+			EXECUTE_DRIVER mysql MYSQL_DRIVER PROGRAMMING_LANGUAGE_MENU
 			;;
 		2)
-			INSTALL_DRIVER node NODE_DRIVER
+			EXECUTE_DRIVER node NODE_DRIVER PROGRAMMING_LANGUAGE_MENU
 			;;
 		3)
-			INSTALL_DRIVER python3 PYTHON_DRIVER
+			EXECUTE_DRIVER python3 PYTHON_DRIVER PROGRAMMING_LANGUAGE_MENU
 			;;
 		x)
 			LIZZ_MENU
@@ -128,16 +159,28 @@ function PROGRAMMING_LANGUAGE_MENU() {
 	esac
 }
 
-function PROGRAMS_MENU() {
+function SOFTWARE_MENU() {
 	MENU=$(
-	dialog --menu "Programs" 0 0 0 \
-	1 "Nvim & init.vim | source: https://github.com/GabrielFlores8227/nvim" \
+	dialog --menu "Softwares" 0 0 0 \
+	1 "Google Chrome   | source: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" \
+	2 "Nvim & Init.vim | nvim source: neovim-defaults | init.vim source: https://github.com/GabrielFlores8227/nvim" \
+	3 "Synth-Shell     | source: https://github.com/andresgongora/synth-shell" \
+	4 "Teamviewer      | source: https://download.teamviewer.com/download/linux/teamviewer_amd64.deb" \
 	x "< Back" --stdout
 	)
 
 	case $MENU in
 		1)
+			EXECUTE_DRIVER google-chrome-stable GOOGLE_CHROME_DRIVER SOFTWARE_MENU
+			;;
+		2)
 			NVIM_AND_INIT_DRIVER
+			;;
+	  3)	
+			SYNTH_SHELL_DRIVER
+			;;
+		4)
+			EXECUTE_DRIVER teamviewer TEAM_VIEWER_DRIVER SOFTWARE_MENU
 			;;
 		x)
 			LIZZ_MENU
@@ -152,7 +195,7 @@ function LIZZ_MENU() {
 	MENU=$(
 	dialog --menu "Welcome to Lizz" 0 0 0 \
 	1 "Programming Languages" \
-	2 "Programs" \
+	2 "Softwares" \
 	x "< Quit" --stdout
 	)
 
@@ -161,7 +204,7 @@ function LIZZ_MENU() {
 			PROGRAMMING_LANGUAGE_MENU
 			;;
 		2)
-			PROGRAMS_MENU
+			SOFTWARE_MENU
 			;;
 		x)
 			clear && exit
