@@ -4,7 +4,7 @@ function MYSQL_DRIVER() {
 	! dpkg -s mecab-ipadic-utf8 &> /dev/null && INSTALL_PACKAGE mecab-ipadic-utf8 "sudo apt-get install mecab-ipadic-utf8"
 
 	! dpkg -s libssl1.1 &> /dev/null \
-	&& wget wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P ./system/cache/mysql \
+	&& wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P ./system/cache/mysql \
 	&& sudo dpkg -i ./system/cache/mysql/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 
 	! dpkg -s gnupg &> /dev/null && INSTALL_PACKAGE "sudo apt-get install gnupg" 
