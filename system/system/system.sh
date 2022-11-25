@@ -2,6 +2,9 @@
 #mysql drivers
 function MYSQL_DRIVER() {
 	#dependency
+	! command -v wget &> /dev/null && INSTALL_PACKAGE gnupg "sudo apt-get install wget" 
+
+	#dependency
 	! dpkg -s mecab-ipadic-utf8 &> /dev/null && INSTALL_PACKAGE mecab-ipadic-utf8 "sudo apt-get install mecab-ipadic-utf8"
 
 	#dependency
@@ -16,7 +19,6 @@ function MYSQL_DRIVER() {
 	! dpkg -s gnupg &> /dev/null && INSTALL_PACKAGE "sudo apt-get install gnupg" 
 
 	#mysql
-	! command -v wget &> /dev/null && INSTALL_PACKAGE gnupg "sudo apt-get install wget" 
 	INSTALL_PACKAGE mysql "wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P /tmp && sudo dpkg -i /tmp/mysql-apt-config*; sudo apt update && sudo apt install mysql-server"
 }
 
