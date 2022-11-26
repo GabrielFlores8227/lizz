@@ -9,6 +9,9 @@ if [[ ! -f  $HOME/.fonts/lizz.cache ]]
 then
 	#dependency
 	! command -v wget &> /dev/null && INSTALL_PACKAGE wget "sudo apt-get install wget"
+	
+	#dependency
+	! command -v unzip &> /dev/null && INSTALL_PACKAGE unzip "sudo apt-get install unzip"
 
 	#dependency
 	[[ ! -f ./cache/3270/3270.zip ]] && INSTALL_PACKAGE 3270_1 \
