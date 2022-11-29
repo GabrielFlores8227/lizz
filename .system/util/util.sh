@@ -9,7 +9,8 @@ function EXECUTE_DRIVER() {
 }
 
 function EXECUTE_DRIVER_D() {
-	$1; $2
+	dialog --title "warning" --yesno "Do you want to install $1?" 0 0 && $2
+	$3
 }
 
 function CHECK_PACKAGE() {
