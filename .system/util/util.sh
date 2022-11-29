@@ -8,6 +8,10 @@ function EXECUTE_DRIVER() {
 	$3
 }
 
+function EXECUTE_DRIVER_D() {
+	$1; $2
+}
+
 function CHECK_PACKAGE() {
 	if ! command -v $1 &> /dev/null && ! dpkg -s $1 &> /dev/null 
 	then
