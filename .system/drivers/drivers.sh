@@ -25,7 +25,7 @@ function RUST_DRIVER() {
 }
 
 function NVIM_IDE_DRIVER() {
-	CHECK_PACKAGE nvim "sudo apt-get install nvim"
+	CHECK_PACKAGE nvim "sudo apt-get install neovim"
 	CHECK_PACKAGE node "NODE_DRIVER"
 	CHECK_PACKAGE yarn "sudo apt-get install yarn"
 	CHECK_PACKAGE python3 "PYTHON3_DRIVER"
