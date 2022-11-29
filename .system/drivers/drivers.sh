@@ -39,5 +39,5 @@ function NVIM_IDE_DRIVER() {
 function SYNTH_SHELL_DRIVER() {
 	CHECK_PACKAGE git "sudo apt-get install git"
 	CHECK_PACKAGE fonts-powerline "sudo apt-get install fonts-powerline"
-	CHECK_PACKAGE_D synth-shell "[[ ! -f /tmp/lizz/synth-shell/setup.s ]] && git clone --recursive https://github.com/andresgongora/synth-shell.git /tmp/lizz/synth-shell && && chmod +x /tmp/lizz/synth-shell/setup.sh; /tmp/lizz/synth-shell/setup.s"
+	CHECK_PACKAGE_D synth-shell "[[ ! -f /tmp/lizz/synth-shell/setup.s ]] && git clone --recursive https://github.com/andresgongora/synth-shell.git /tmp/lizz/synth-shell && && chmod +x /tmp/lizz/synth-shell/setup.sh; /tmp/lizz/synth-shell/setup.sh"
 }
