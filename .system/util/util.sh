@@ -12,7 +12,7 @@ function CHECK_PACKAGE() {
 	if ! command -v $1 &> /dev/null && ! dpkg -s $1 &> /dev/null 
 	then
 		clear && echo -e "\n\033[1;32m[*] Installing $1\033[m" \
-		&& eval $2 \
+		&& sudo apt-get update && eval $2 \
 		&& echo -e "\n\033[0;37;42mPRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
 		|| echo -e "\n\033[0;37;41mPRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 	fi
@@ -20,7 +20,7 @@ function CHECK_PACKAGE() {
 
 function CHECK_PACKAGE_D() {
 	clear && echo -e "\n\033[1;32m[*] Installing $1\033[m" \
-	&& eval $2 \
+	&& sudo apt-get update && eval $2 \
 	&& echo -e "\n\033[0;37;42mPRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
 	|| echo -e "\n\033[0;37;41mPRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 }
