@@ -2,8 +2,8 @@ function MYSQL_DRIVER() {
 	CHECK_PACKAGE wget  "sudo apt-get install wget"
 	CHECK_PACKAGE mecab-ipadic-utf8 "sudo apt-get install mecab-ipadic-utf8"
 	CHECK_PACKAGE gnupg "sudo apt-get install gnupg"
-	CHECK_PACKAGE libssl1.1 "[[ ! -f /tmp/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb ]] && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P /tmp/mysql/libssl1; sudo dpkg -i /tmp/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
-	CHECK_PACKAGE_D mysql "[[ ! -f /tmp/mysql/mysql-apt-config_0.8.22-1_all.deb ]] && wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P /tmp/mysql; sudo dpkg -i /tmp/mysql/mysql-apt-config* && sudo apt update && sudo apt install mysql-server"
+	CHECK_PACKAGE libssl1.1 "[[ ! -f /tmp/lizz/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb ]] && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P /tmp/lizz/mysql/libssl1; sudo dpkg -i /tmp/lizz/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
+	CHECK_PACKAGE_D mysql "[[ ! -f /tmp/lizz/mysql/mysql-apt-config_0.8.22-1_all.deb ]] && wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb -P /tmp/lizz/mysql; sudo dpkg -i /tmp/lizz/mysql/mysql-apt-config* && sudo apt update && sudo apt install mysql-server"
 }
 
 function NODE_DRIVER() {
@@ -33,11 +33,11 @@ function NVIM_IDE_DRIVER() {
 	CHECK_PACKAGE curl "sudo apt-get install curl"
 	CHECK_PACKAGE git "sudo apt-get install git"
 	CHECK_PACKAGE_D vim-plug "[[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]] && sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
-	CHECK_PACKAGE_D nvim-ide "[[ ! -f /tmp/nvim-ide/init.vim ]] && git clone https://github.com/GabrielFlores8227/nvim /tmp/nvim-ide/; [[ ! -d $HOME/.config/nvim ]] && mkdir -p $HOME/.config/nvim; cp -i /tmp/nvim-ide/init.vim $HOME/.config/nvim"
+	CHECK_PACKAGE_D nvim-ide "[[ ! -f /tmp/lizz/nvim-ide/init.vim ]] && git clone https://github.com/GabrielFlores8227/nvim /tmp/lizz/nvim-ide/; [[ ! -d $HOME/.config/nvim ]] && mkdir -p $HOME/.config/nvim; cp -i /tmp/lizz/nvim-ide/init.vim $HOME/.config/nvim"
 }
 
 function SYNTH_SHELL_DRIVER() {
 	CHECK_PACKAGE git "sudo apt-get install git"
 	CHECK_PACKAGE fonts-powerline "sudo apt-get install fonts-powerline"
-	CHECK_PACKAGE_D synth-shell "[[ ! -f /tmp/synth-shell/setup.s ]] && git clone --recursive https://github.com/andresgongora/synth-shell.git /tmp/synth-shell && && chmod +x /tmp/synth-shell/setup.sh; /tmp/synth-shell/setup.s"
+	CHECK_PACKAGE_D synth-shell "[[ ! -f /tmp/lizz/synth-shell/setup.s ]] && git clone --recursive https://github.com/andresgongora/synth-shell.git /tmp/lizz/synth-shell && && chmod +x /tmp/lizz/synth-shell/setup.sh; /tmp/lizz/synth-shell/setup.s"
 }
