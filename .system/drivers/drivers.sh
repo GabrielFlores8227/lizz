@@ -26,13 +26,13 @@ function RUST_DRIVER() {
 
 function NVIM_IDE_DRIVER() {
 	CHECK_PACKAGE nvim "sudo apt-get install neovim"
-	CHECK_PACKAGE node "NODE_DRIVER"
+	CHECK_PACKAGE node "CHECK_PACKAGE_D node NODE_DRIVER"
 	CHECK_PACKAGE yarn "sudo apt-get install yarn"
-	CHECK_PACKAGE python3 "PYTHON3_DRIVER"
+	CHECK_PACKAGE python3 "CHECK_PACKAGE_D python3 PYTHON3_DRIVER"
 	CHECK_PACKAGE unzip "sudo apt-get install unzip"
 	CHECK_PACKAGE curl "sudo apt-get install curl"
 	CHECK_PACKAGE git "sudo apt-get install git"
-	CHECK_PACKAGE_D "[[ ! -f /tmp/lizz/nvim-ide/nerd-fonts/3270.zip ]] && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/3270.zip -P /tmp/lizz/nvim-ide/nerd-fonts; unzip /tmp/lizz/nvim-ide/nerd-fonts/3270.zip -d $HOME/.fonts"
+	CHECK_PACKAGE_D 3270 "[[ ! -f /tmp/lizz/nvim-ide/nerd-fonts/3270.zip ]] && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/3270.zip -P /tmp/lizz/nvim-ide/nerd-fonts; unzip /tmp/lizz/nvim-ide/nerd-fonts/3270.zip -d $HOME/.fonts"
 	CHECK_PACKAGE_D vim-plug "[[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ]] && sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
 	CHECK_PACKAGE_D nvim-ide "[[ ! -f /tmp/lizz/nvim-ide/init.vim ]] && git clone https://github.com/GabrielFlores8227/nvim /tmp/lizz/nvim-ide/; [[ ! -d $HOME/.config/nvim ]] && mkdir -p $HOME/.config/nvim; cp -i /tmp/lizz/nvim-ide/init.vim $HOME/.config/nvim"
 }
