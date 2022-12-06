@@ -1,10 +1,10 @@
 function GOOGLE_CHROME_DRIVER() {
-		CHECK_PACKAGE wget  "sudo apt-get install wget"
+		CHECK_PACKAGE wget "sudo apt-get install wget"
 		CHECK_PACKAGE_D google-chrome "[[ ! -f /tmp/lizz/google-chrome/google-chrome-stable_current_amd64.deb ]] && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /tmp/lizz/google-chrome; sudo dpkg -i /tmp/lizz/google-chrome/google-chrome-stable_current_amd64.deb"
 }
 
 function MYSQL_DRIVER() {
-	CHECK_PACKAGE wget  "sudo apt-get install wget"
+	CHECK_PACKAGE wget "sudo apt-get install wget"
 	CHECK_PACKAGE mecab-ipadic-utf8 "sudo apt-get install mecab-ipadic-utf8"
 	CHECK_PACKAGE gnupg "sudo apt-get install gnupg"
 	CHECK_PACKAGE libssl1.1 "[[ ! -f /tmp/lizz/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb ]] && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -P /tmp/lizz/mysql/libssl1; sudo dpkg -i /tmp/lizz/mysql/libssl1/libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
@@ -32,7 +32,7 @@ function NODE_DRIVER() {
 
 function OPERA_DRIVER() {
 	CHECK_PACKAGE curl "sudo apt-get install curl"
-	REPO=""
+	CHECK_PACKAGE wget "sudo apt-get install wget"
 	for c in $(curl "https://download3.operacdn.com/pub/opera/desktop/93.0.4585.37/linux/" | grep -i "opera-stable" | tr ">" "\n" | tr "<" "\n" | tr '"' "\n")
 	do
 		if [[ $c =~ .*"amd64.deb".* ]] && [[ ! $c =~ .*"sha256sum".* ]] 
