@@ -1,9 +1,9 @@
 function EXECUTE_DRIVER() {
 	if ! command -v $1 &> /dev/null && ! dpkg -s $1 &> /dev/null
 	then
-		$2
+		clear && $2
 	else
-		dialog --title "warning" --yesno "$1 is already installed, do you want to reinstall it?" 0 0 && $2
+		dialog --title "warning" --yesno "$1 is already installed, do you want to reinstall it?" 0 0 && clear && $2
 	fi
 	$3
 }
@@ -29,3 +29,4 @@ function CHECK_PACKAGE_D() {
 	&& echo -e "\n\033[0;37;42mPRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
 	|| echo -e "\n\033[0;37;41mPRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 }
+

@@ -30,6 +30,20 @@ function NODE_DRIVER() {
 	CHECK_PACKAGE_D node "curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs"
 }
 
+function OPERA_DRIVER() {
+	CHECK_PACKAGE curl "sudo apt-get install curl"
+	REPO=""
+	for c in $(curl "https://download3.operacdn.com/pub/opera/desktop/93.0.4585.37/linux/" | grep -i "opera-stable" | tr ">" "\n" | tr "<" "\n" | tr '"' "\n")
+	do
+		if [[ $c =~ .*"amd64.deb".* ]] && [[ ! $c =~ .*"sha256sum".* ]] 
+		then
+			REPO="https://download3.operacdn.com/pub/opera/desktop/93.0.4585.37/linux/$c"
+			break
+		fi
+ 	done
+	CHECK_PACKAGE_D opera "[[ ! -f /tmp/lizz/opera/*.deb ]] && wget $REPO -P /tmp/lizz/opera; sudo dpkg -i /tmp/lizz/opera/*.deb"
+}
+
 function PYTHON3_DRIVER() {
 	CHECK_PACKAGE_D python3 "sudo apt-get install python3"
 	CHECK_PACKAGE_D python3-pip "sudo apt-get install python3-pip"

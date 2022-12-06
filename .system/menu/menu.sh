@@ -2,12 +2,16 @@ function DESKTOP_APPS_MENU() {
 	MENU=$(
 	dialog --menu "Desktop Apps" 0 0 0 \
 	1 "➥  Google-chrome" \
+	2 "➥  Opera" \
 	x "BACK" --stdout
 	)
 
 	case $MENU in
 		1)
 			EXECUTE_DRIVER google-chrome GOOGLE_CHROME_DRIVER DESKTOP_APPS_MENU 
+			;;
+		2)
+			EXECUTE_DRIVER opera OPERA_DRIVER DESKTOP_APPS_MENU 
 			;;
 		x)
 			LIZZ_MENU
