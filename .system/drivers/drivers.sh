@@ -18,7 +18,7 @@ function MYSQL_DRIVER() {
 
 	TEMP=$(mktemp)
 	CHECK_PACKAGE_D mysql "wget -O $TEMP https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb \
-	&& sudo dpkg -i $TEMP && && sudo apt update && sudo apt install mysql-server; rm $TEMP"
+	&& sudo dpkg -i $TEMP && sudo apt update && sudo apt install mysql-server; rm $TEMP"
 }
 
 function NVIM_IDE_DRIVER() {
