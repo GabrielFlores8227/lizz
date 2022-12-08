@@ -18,15 +18,15 @@ function CHECK_PACKAGE() {
 	then
 		clear && echo -e "\n\033[1;32m[*] Installing $1\033[m" \
 		&& sudo apt-get update && eval $2 \
-		&& echo -e "\n\033[0;37;42m$1 INSTALLED | PRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
-		|| echo -e "\n\033[0;37;41m$1 COULD NOT BE INSTALLED | PRESS ENTER TO CONTINUE\033[0m" && read -sp ""
+		&& echo -e "\n\033[0;37;42m$1 installed | PRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
+		|| echo -e "\n\033[0;37;41m$1 could not be installed | PRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 	fi
 }
 
 function CHECK_PACKAGE_D() {
 	clear && echo -e "\n\033[1;32m[*] Installing $1\033[m" \
 	&& sudo apt-get update && eval $2 \
-	&& echo -e "\n\033[0;37;42m$1 INSTALLED | PRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
-	|| echo -e "\n\033[0;37;41m$1 COULD NOT BE INSTALLED | PRESS ENTER TO CONTINUE\033[0m" && read -sp ""
+	&& echo -e "\n\033[0;37;42m$1 installed | PRESS ENTER TO CONTINUE\033[0m" && read -sp "" \
+	|| echo -e "\n\033[0;37;41m$1 could not be installed | PRESS ENTER TO CONTINUE\033[0m" && read -sp ""
 }
 
