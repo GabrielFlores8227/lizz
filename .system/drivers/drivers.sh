@@ -66,7 +66,7 @@ function OPERA_DRIVER() {
  	done
 
 	TEMP=$(mktemp)
-	CHECK_PACKAGE_D opera "wget -O $TEMP $URL && sudo dpkg -i $TEMP; rm $TEMP"
+	CHECK_PACKAGE_D opera "wget -O $TEMP $URL && sudo dpkg -i $TEMP && sudo apt --fix-broken install; rm $TEMP"
 }
 
 function PYTHON3_DRIVER() {
