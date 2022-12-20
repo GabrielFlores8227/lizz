@@ -1,8 +1,8 @@
 function GOOGLE_CHROME_DRIVER() {
-		CHECK_PACKAGE wget "sudo apt-get install wget"
-		TEMP=$(mktemp)
-		CHECK_PACKAGE_D google-chrome "wget -O $TEMP 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' \
-		&& sudo dpkg -i $TEMP; rm $TEMP"
+	CHECK_PACKAGE wget "sudo apt-get install wget"
+	TEMP=$(mktemp)
+	CHECK_PACKAGE_D google-chrome "wget -O $TEMP 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' \
+	&& sudo dpkg -i $TEMP; rm $TEMP"
 }
 
 function MYSQL_DRIVER() {
