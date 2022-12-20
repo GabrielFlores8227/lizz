@@ -6,7 +6,7 @@ function EXECUTE_DRIVER_D() {
 function CHECK_PACKAGE() {
 	if ! command -v $1 &> /dev/null && ! dpkg -s $1 &> /dev/null 
 	then
-		CHECK_PACKAGE_D $@
+		CHECK_PACKAGE_D $1 $2
 	fi
 }
 
